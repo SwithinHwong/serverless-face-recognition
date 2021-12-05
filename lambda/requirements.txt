@@ -1,0 +1,4 @@
+numpy
+cython
+insightface==0.5
+onnxruntime==1.9.0

@@ -10,7 +10,7 @@ RUN $PIP_INSTALL insightface==0.5
 RUN $PIP_INSTALL onnxruntime==1.9.0
 RUN python -c "from insightface.utils import download;download('models', 'buffalo_m')"
 
-COPY demo/face_recog_demo.py /app/
+COPY face_recog_demo.py /app/
 
 WORKDIR /app
 
