@@ -1,8 +1,5 @@
 FROM --platform=linux/amd64 public.ecr.aws/lambda/python:3.8
 
-# Copy function code
-COPY app.py ${LAMBDA_TASK_ROOT}
-
 RUN yum update -y && yum install -y gcc gcc-c++ curl
 # ENV PIP_INSTALL="pip3 --no-cache-dir install --upgrade --target \"${LAMBDA_TASK_ROOT}\""
 ENV PIP_INSTALL="pip3 --no-cache-dir install --upgrade "
@@ -15,6 +12,14 @@ RUN  pip3 --no-cache-dir install -r requirements.txt --target "${LAMBDA_TASK_ROO
 
 RUN echo `PWD`
 RUN python -c "from insightface.utils import download;download('models', 'buffalo_m', root='./.insightface')"
+
+# Copy function code
+COPY lambda/app.py ${LAMBDA_TASK_ROOT}
+COPY lambda/dao.py ${LAMBDA_TASK_ROOT}
+COPY lambda/face_detection.py ${LAMBDA_TASK_ROOT}
+COPY lambda/face_match.py ${LAMBDA_TASK_ROOT}
+COPY lambda/face_recognition.py ${LAMBDA_TASK_ROOT}
+COPY data ${LAMBDA_TASK_ROOT}
 
 # Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
 CMD [ "app.handler" ]

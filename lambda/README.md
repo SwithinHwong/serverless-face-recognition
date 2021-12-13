@@ -3,7 +3,7 @@
  * @Author: SijinHuang
  * @Date: 2021-12-05 00:33:42
  * @LastEditors: SijinHuang
- * @LastEditTime: 2021-12-05 00:59:56
+ * @LastEditTime: 2021-12-13 15:28:58
 -->
 
 # Deployment Steps
@@ -38,3 +38,22 @@ Following scripts are copied from [Lambda Documentations](https://docs.aws.amazo
     ```
 
 1. Now that your container image resides in the Amazon ECR container registry, you can [create and run](https://docs.aws.amazon.com/lambda/latest/dg/configuration-images.html) the Lambda function.
+
+## Optional: Test the Image Locally
+[Lambda Documentations](https://docs.aws.amazon.com/lambda/latest/dg/images-test.html#images-test-AWSbase)
+
+1. Run your container image locally using the docker run command.
+
+   ```bash
+    docker run -p 9000:8080  sfr-lambda:latest
+    ```
+
+    This command runs the image as a container and starts up an endpoint locally at localhost:9000/2015-03-31/functions/function/invocations.
+
+1. From a new terminal window, post an event to the following endpoint using a curl command:
+
+   ```bash
+    curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'
+    ```
+
+    This command invokes the Lambda function running in the container image and returns a response.
