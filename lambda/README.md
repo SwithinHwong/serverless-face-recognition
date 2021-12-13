@@ -3,7 +3,7 @@
  * @Author: SijinHuang
  * @Date: 2021-12-05 00:33:42
  * @LastEditors: SijinHuang
- * @LastEditTime: 2021-12-13 15:28:58
+ * @LastEditTime: 2021-12-13 21:53:31
 -->
 
 # Deployment Steps
@@ -14,8 +14,10 @@ Following scripts are copied from [Lambda Documentations](https://docs.aws.amazo
 
 1. Build image
 
+    At project root directory:
+
     ```bash
-    docker build -t sfr-lambda .
+    docker build -t sfr-lambda -f lambda/Dockerfile .
     ```
 
 1. Authenticate the Docker CLI to your Amazon ECR registry.
@@ -53,7 +55,7 @@ Following scripts are copied from [Lambda Documentations](https://docs.aws.amazo
 1. From a new terminal window, post an event to the following endpoint using a curl command:
 
    ```bash
-    curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'
+    curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{"img_url": "https://images-na.ssl-images-amazon.com/images/M/MV5BOTg5NDE3OTA4MF5BMl5BanBnXkFtZTcwMTA1MTQ5MQ@@._V1_.jpg"}'
     ```
 
     This command invokes the Lambda function running in the container image and returns a response.
