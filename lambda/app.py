@@ -7,15 +7,10 @@ LastEditors: SijinHuang
 LastEditTime: 2021-12-13 17:17:04
 """
 
-import cv2
-import sys
 import json
-import numpy as np
 
-from dao import fetch_img
-from face_detection import detect_faces
-from face_recognition import recog_faces
-from face_match import match_face
+from common import fetch_img, integrated_face_recog_process
+
 
 # import insightface
 # from insightface.app import FaceAnalysis
@@ -23,12 +18,6 @@ from face_match import match_face
 
 # model = FaceAnalysis(name='buffalo_m', root='./.insightface')
 # model.prepare(ctx_id=0, det_size=(640, 640))
-
-def integrated_face_recog_process(img):
-    det_res = detect_faces(img)
-    recog_res = recog_faces(img, det_res)
-    matched_res = match_face(recog_res)
-    return matched_res
 
 
 def handler(event, context):

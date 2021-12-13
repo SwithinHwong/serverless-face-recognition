@@ -35,3 +35,4 @@ def handler(event, context):
     det_res = json.loads(event['det_res'])
     recog_res = recog_faces(img, det_res)
     return json.dumps(recog_res, ensure_ascii=False)
+
