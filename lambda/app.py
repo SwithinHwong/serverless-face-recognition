@@ -4,12 +4,13 @@ Descripttion:
 Author: SijinHuang
 Date: 2021-12-02 13:58:15
 LastEditors: SijinHuang
-LastEditTime: 2021-12-13 17:17:04
+LastEditTime: 2021-12-13 21:41:21
 """
 
 import json
 
-from common import fetch_img, integrated_face_recog_process
+from common.dao import fetch_img
+from common.integration import integrated_face_recog_process
 
 
 # import insightface

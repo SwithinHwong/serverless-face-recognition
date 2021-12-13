@@ -4,13 +4,13 @@ Descripttion:
 Author: SijinHuang
 Date: 2021-12-06 21:19:11
 LastEditors: SijinHuang
-LastEditTime: 2021-12-13 14:04:30
+LastEditTime: 2021-12-13 21:40:15
 """
 import json
 import numpy as np
 import insightface
 
-from dao import fetch_img
+from common.dao import fetch_img
 
 recognition_model = insightface.model_zoo.get_model('./.insightface/models/buffalo_m/w600k_r50.onnx')
 recognition_model.prepare(ctx_id=0)

@@ -4,14 +4,14 @@ Descripttion:
 Author: SijinHuang
 Date: 2021-12-06 21:19:11
 LastEditors: SijinHuang
-LastEditTime: 2021-12-13 13:50:18
+LastEditTime: 2021-12-13 21:39:29
 """
 import json
 import numpy as np
 import insightface
 from insightface.data import get_image as ins_get_image
 
-from dao import fetch_img
+from common.dao import fetch_img
 
 detection_model = insightface.model_zoo.get_model('./.insightface/models/buffalo_m/det_2.5g.onnx')
 detection_model.prepare(ctx_id=0, input_size=(640, 640), det_thresh=0.5)

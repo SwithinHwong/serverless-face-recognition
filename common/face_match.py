@@ -4,13 +4,13 @@ Description:
 Author: SijinHuang
 Date: 2021-12-13 13:24:32
 LastEditors: SijinHuang
-LastEditTime: 2021-12-13 13:49:03
+LastEditTime: 2021-12-13 21:40:05
 """
 import json
 import numpy as np
 import pandas as pd
 
-from dao import fetch_img
+from common.dao import fetch_img
 
 df_gallery = pd.read_csv('./data/gallery_urls.csv')
 gallery_names = df_gallery['name'].values.tolist()

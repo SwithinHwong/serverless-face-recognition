@@ -16,10 +16,7 @@ RUN python -c "from insightface.utils import download;download('models', 'buffal
 
 # Copy function code
 COPY lambda/app.py ${LAMBDA_TASK_ROOT}
-COPY common/dao.py ${LAMBDA_TASK_ROOT}
-COPY common/face_detection.py ${LAMBDA_TASK_ROOT}
-COPY common/face_match.py ${LAMBDA_TASK_ROOT}
-COPY common/face_recognition.py ${LAMBDA_TASK_ROOT}
+COPY common ${LAMBDA_TASK_ROOT}/common
 COPY data ${LAMBDA_TASK_ROOT}/data
 
 # Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
