@@ -4,7 +4,7 @@ Descripttion:
 Author: SijinHuang
 Date: 2021-12-02 13:58:15
 LastEditors: SijinHuang
-LastEditTime: 2021-12-13 15:20:48
+LastEditTime: 2021-12-13 17:17:04
 """
 
 import cv2
@@ -28,6 +28,7 @@ def integrated_face_recog_process(img):
     det_res = detect_faces(img)
     recog_res = recog_faces(img, det_res)
     matched_res = match_face(recog_res)
+    return matched_res
 
 
 def handler(event, context):

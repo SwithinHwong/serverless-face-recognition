@@ -1,3 +1,4 @@
+# FROM public.ecr.aws/lambda/python:3.8
 FROM --platform=linux/amd64 public.ecr.aws/lambda/python:3.8
 
 RUN yum update -y && yum install -y gcc gcc-c++ curl
@@ -19,7 +20,7 @@ COPY lambda/dao.py ${LAMBDA_TASK_ROOT}
 COPY lambda/face_detection.py ${LAMBDA_TASK_ROOT}
 COPY lambda/face_match.py ${LAMBDA_TASK_ROOT}
 COPY lambda/face_recognition.py ${LAMBDA_TASK_ROOT}
-COPY data ${LAMBDA_TASK_ROOT}
+COPY data ${LAMBDA_TASK_ROOT}/data
 
 # Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
 CMD [ "app.handler" ]
