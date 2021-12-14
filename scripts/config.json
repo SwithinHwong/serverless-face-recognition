@@ -1,0 +1,8 @@
+{
+    "img_url": "local:Scarlett_Johansson_397.jpg",
+    "request_number": 10,
+    "ecs_endpoint": "http://face-recognition-3-1930933987.us-east-2.elb.amazonaws.com",
+    "lambda_endpoint": "https://b8eahbiwdk.execute-api.us-east-2.amazonaws.com/_dev",
+    "target": "lambda",
+    "experiment_name": "lambda_2048MB"
+}
