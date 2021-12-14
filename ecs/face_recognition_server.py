@@ -1,15 +1,24 @@
 import http.server as http_server
 import logging
+import time
 from common.integration import integrated_face_recog_process
 from common.dao import fetch_img
-import sys
-# sys.path.insert('../common')
 import json
 
 
 class FaceRecognitionServer(http_server.BaseHTTPRequestHandler):
+    def do_GET(self):
+        logging.info(f'url path is {self.path}')
+        if self.path == "/health":
+            logging.info("healthcheck....")
+            self.send_response(200)
+            self.end_headers()
+        else:
+            self.send_response(404)
+            self.end_headers()
 
     def do_POST(self):
+        start_time = time.time()
         content_length = int(self.headers['Content-Length'])  # <--- Gets the size of data
         post_data = self.rfile.read(content_length)  # <--- Gets the data itself
         req = json.loads(post_data)
@@ -19,11 +28,15 @@ class FaceRecognitionServer(http_server.BaseHTTPRequestHandler):
         logging.info(f'img is {img}')
         matched_res = integrated_face_recog_process(img)
         logging.info(f'mathed_res {matched_res}')
-        logging.info("233333")
         self.send_response(200)
         self.send_header("content-type", "application/json")
         self.end_headers()
-        self.wfile.write(json.dumps(matched_res).encode("UTF-8"))
+        end_time = time.time()
+        output = {
+            "result": matched_res,
+            "duration": end_time - start_time,
+        }
+        self.wfile.write(json.dumps(output).encode("UTF-8"))
 
 
 PORT = 10086

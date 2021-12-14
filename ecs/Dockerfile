@@ -11,18 +11,12 @@ RUN $PIP_INSTALL numpy cython
 COPY requirements.txt  .
 RUN  pip3 --no-cache-dir install -r requirements.txt
 
-RUN echo `PWD`
 RUN python -c "from insightface.utils import download;download('models', 'buffalo_m', root='/app/.insightface')"
 
-COPY ecs/app.py /app/
-COPY ecs/face_recognition_server.py /app/
+COPY ecs /app/
 COPY common /app/common
 COPY data /app/data
-
 EXPOSE 10086
-
+# Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
 WORKDIR /app
-
-ENTRYPOINT [ "python" ]  # "/var/lang/bin/python"
-# CMD ["app.py"]
-CMD ["face_recognition_server.py"]
+ENTRYPOINT [ "python", "-m","face_recognition_server" ]
