@@ -4,10 +4,11 @@ Descripttion:
 Author: SijinHuang
 Date: 2021-12-02 13:58:15
 LastEditors: SijinHuang
-LastEditTime: 2021-12-13 21:41:21
+LastEditTime: 2021-12-15 02:21:37
 """
 
 import json
+import time
 
 from common.dao import fetch_img
 from common.integration import integrated_face_recog_process
@@ -22,7 +23,13 @@ from common.integration import integrated_face_recog_process
 
 
 def handler(event, context):
+    ts_start = time.time()
     img_url = event['img_url']
     img = fetch_img(img_url)
     matched_res = integrated_face_recog_process(img)
-    return json.dumps(matched_res, ensure_ascii=False)
+    ts_end = time.time()
+    res = {
+        'result': matched_res,
+        'duration': (ts_end - ts_start),  # server time
+    }
+    return json.dumps(res, ensure_ascii=False)
