@@ -4,7 +4,7 @@ Descripttion:
 Author: SijinHuang
 Date: 2021-12-02 13:58:15
 LastEditors: SijinHuang
-LastEditTime: 2021-12-15 02:21:37
+LastEditTime: 2021-12-15 04:02:42
 """
 
 import json
@@ -32,4 +32,4 @@ def handler(event, context):
         'result': matched_res,
         'duration': (ts_end - ts_start),  # server time
     }
-    return json.dumps(res, ensure_ascii=False)
+    return res
