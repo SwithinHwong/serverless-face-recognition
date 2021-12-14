@@ -1,4 +1,5 @@
 import http.server as http_server
+import multiprocessing
 import logging
 import time
 from common.integration import integrated_face_recog_process
@@ -35,6 +36,7 @@ class FaceRecognitionServer(http_server.BaseHTTPRequestHandler):
         output = {
             "result": matched_res,
             "duration": end_time - start_time,
+            'cpu_cores': multiprocessing.cpu_count,
         }
         self.wfile.write(json.dumps(output).encode("UTF-8"))
 

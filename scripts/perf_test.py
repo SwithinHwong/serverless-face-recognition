@@ -4,7 +4,7 @@ Descripttion:
 Author: ZhifeiCheng
 Date: 2021-12-15 03:17:13
 LastEditors: SijinHuang
-LastEditTime: 2021-12-15 03:46:20
+LastEditTime: 2021-12-15 04:56:30
 """
 import json
 import time
@@ -28,14 +28,18 @@ def send_request(img_url, end_point, thread_id):
     end_time = time.time()
     # print([thread_id, start_time, end_time, (end_time - start_time), response.text])
     try:
-        server_time = json.loads(response.text)['duration']
+        res = json.loads(response.text)
+        server_time = res['duration']
+        cpu_cores = res['cpu_cores']
     except:
         traceback.print_exc()
         server_time = -1
+        cpu_cores = -1
     return {
         'thread_id': thread_id,
         'client_time': (end_time - start_time),
-        'server_time': server_time
+        'server_time': server_time,
+        'cpu_cores': cpu_cores,
     }
 
 
@@ -48,7 +52,7 @@ def run():
     data = [(config["img_url"], end_point, i) for i in range(config["request_number"])]
     with Pool(processes=config["request_number"]) as pool:
         metrics = pool.starmap(send_request, data)
-    metrics_df = pd.DataFrame(metrics, columns=['thread_id', 'client_time', 'server_time'])
+    metrics_df = pd.DataFrame(metrics, columns=['thread_id', 'client_time', 'server_time', 'cpu_cores'])
     metrics_df['experiment_name'] = config['experiment_name']
     print(metrics_df)
 

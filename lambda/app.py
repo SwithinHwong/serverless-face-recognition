@@ -4,11 +4,12 @@ Descripttion:
 Author: SijinHuang
 Date: 2021-12-02 13:58:15
 LastEditors: SijinHuang
-LastEditTime: 2021-12-15 04:02:42
+LastEditTime: 2021-12-15 04:49:30
 """
 
 import json
 import time
+import multiprocessing
 
 from common.dao import fetch_img
 from common.integration import integrated_face_recog_process
@@ -31,5 +32,6 @@ def handler(event, context):
     res = {
         'result': matched_res,
         'duration': (ts_end - ts_start),  # server time
+        'cpu_cores': multiprocessing.cpu_count(),
     }
     return res
