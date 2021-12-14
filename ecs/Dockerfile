@@ -15,6 +15,7 @@ RUN echo `PWD`
 RUN python -c "from insightface.utils import download;download('models', 'buffalo_m', root='/app/.insightface')"
 
 COPY ecs/app.py /app/
+COPY ecs/face_recognition_server.py /app/
 COPY common /app/common
 COPY data /app/data
 
@@ -23,4 +24,5 @@ EXPOSE 10086
 WORKDIR /app
 
 ENTRYPOINT [ "python" ]  # "/var/lang/bin/python"
-CMD ["app.py"]
+# CMD ["app.py"]
+CMD ["face_recognition_server.py"]

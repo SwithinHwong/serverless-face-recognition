@@ -1,7 +1,7 @@
 import http.server as http_server
 import logging
-from integration import integrated_face_recog_process
-from dao import fetch_img
+from common.integration import integrated_face_recog_process
+from common.dao import fetch_img
 import sys
 # sys.path.insert('../common')
 import json
@@ -31,7 +31,7 @@ PORT = 10086
 
 def run():
     logging.basicConfig(level=logging.INFO)
-    server_address = ('', PORT)
+    server_address = ('0.0.0.0', PORT)
     server = http_server.HTTPServer(server_address, FaceRecognitionServer)
     server.serve_forever()
 
