@@ -36,7 +36,7 @@ class FaceRecognitionServer(http_server.BaseHTTPRequestHandler):
         output = {
             "result": matched_res,
             "duration": end_time - start_time,
-            'cpu_cores': multiprocessing.cpu_count,
+            'cpu_cores': multiprocessing.cpu_count(),
         }
         self.wfile.write(json.dumps(output).encode("UTF-8"))
 
